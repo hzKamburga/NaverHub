@@ -17,32 +17,33 @@ function Script2.Execute(gui, helpers)
     gui:ClearContent()
     
     -- Add title
-    gui:AddLabel("=== Game Utilities ===")
+    gui:AddLabel("Game Utilities", "🎮")
     gui:AddLabel("")
     
-    -- Anti-AFK
-    gui:AddButton("Enable Anti-AFK", function()
+    -- System utilities
+    gui:AddLabel("System Utilities", "🔧")
+    gui:AddLabel("")
+    
+    gui:AddButton("Enable Anti-AFK", "⏰", function()
         helpers.SafeExecute(function()
             helpers.AntiAFK()
         end, "Failed to enable Anti-AFK")
     end)
     
-    -- Show game info
-    gui:AddButton("Show Game Info", function()
+    gui:AddButton("Show Game Info", "ℹ️", function()
         helpers.SafeExecute(function()
             local info = helpers.GetGameInfo()
             local message = string.format(
-                "Game: %s\nPlace ID: %s\nGame ID: %s",
-                info.GameName or "Unknown",
-                info.PlaceId,
-                info.GameId
+                "Place ID: %s\nGame ID: %s\nJob ID: %s",
+                tostring(info.PlaceId),
+                tostring(info.GameId),
+                tostring(info.JobId)
             )
             helpers.Notify("Game Info", message, 5)
         end, "Failed to get game info")
     end)
     
-    -- Show FPS
-    gui:AddButton("Show FPS", function()
+    gui:AddButton("Show FPS", "📊", function()
         helpers.SafeExecute(function()
             local getFPS = helpers.GetFPS()
             wait(1)
@@ -51,8 +52,7 @@ function Script2.Execute(gui, helpers)
         end, "Failed to get FPS")
     end)
     
-    -- Show Ping
-    gui:AddButton("Show Ping", function()
+    gui:AddButton("Show Ping", "📶", function()
         helpers.SafeExecute(function()
             local ping = helpers.GetPing()
             helpers.Notify("Ping", "Current Ping: " .. tostring(ping) .. "ms", 3)
@@ -61,8 +61,11 @@ function Script2.Execute(gui, helpers)
     
     gui:AddLabel("")
     
-    -- Fullbright
-    gui:AddButton("Enable Fullbright", function()
+    -- Visual utilities
+    gui:AddLabel("Visual Utilities", "👁️")
+    gui:AddLabel("")
+    
+    gui:AddButton("Enable Fullbright", "💡", function()
         helpers.SafeExecute(function()
             local Lighting = game:GetService("Lighting")
             Lighting.Brightness = 2
@@ -74,8 +77,7 @@ function Script2.Execute(gui, helpers)
         end, "Failed to enable fullbright")
     end)
     
-    -- Reset Lighting
-    gui:AddButton("Reset Lighting", function()
+    gui:AddButton("Reset Lighting", "🌙", function()
         helpers.SafeExecute(function()
             local Lighting = game:GetService("Lighting")
             Lighting.Brightness = 1
@@ -87,10 +89,7 @@ function Script2.Execute(gui, helpers)
         end, "Failed to reset lighting")
     end)
     
-    gui:AddLabel("")
-    
-    -- Remove fog
-    gui:AddButton("Remove Fog", function()
+    gui:AddButton("Remove Fog", "🌫️", function()
         helpers.SafeExecute(function()
             local Lighting = game:GetService("Lighting")
             Lighting.FogEnd = 100000
@@ -98,9 +97,14 @@ function Script2.Execute(gui, helpers)
         end, "Failed to remove fog")
     end)
     
-    -- Infinite Jump
+    gui:AddLabel("")
+    
+    -- Movement utilities
+    gui:AddLabel("Movement Utilities", "🦘")
+    gui:AddLabel("")
+    
     local infiniteJumpEnabled = false
-    gui:AddButton("Toggle Infinite Jump", function()
+    gui:AddButton("Toggle Infinite Jump", "🦘", function()
         helpers.SafeExecute(function()
             infiniteJumpEnabled = not infiniteJumpEnabled
             
@@ -127,7 +131,7 @@ function Script2.Execute(gui, helpers)
     end)
     
     gui:AddLabel("")
-    gui:AddLabel("Note: Use these features responsibly")
+    gui:AddLabel("Note: Use these features responsibly", "⚠️")
 end
 
 return Script2

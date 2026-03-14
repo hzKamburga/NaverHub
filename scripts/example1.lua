@@ -17,11 +17,14 @@ function Script1.Execute(gui, helpers)
     gui:ClearContent()
     
     -- Add title
-    gui:AddLabel("=== Player Tools ===")
+    gui:AddLabel("Player Tools", "👤")
     gui:AddLabel("")
     
-    -- Walkspeed modifier
-    gui:AddButton("Set Walkspeed (16)", function()
+    -- Walkspeed section
+    gui:AddLabel("Movement Speed", "⚡")
+    gui:AddLabel("")
+    
+    gui:AddButton("Walkspeed: Normal (16)", "🚶", function()
         local humanoid = helpers.GetHumanoid()
         if humanoid then
             humanoid.WalkSpeed = 16
@@ -31,7 +34,7 @@ function Script1.Execute(gui, helpers)
         end
     end)
     
-    gui:AddButton("Set Walkspeed (50)", function()
+    gui:AddButton("Walkspeed: Fast (50)", "🏃", function()
         local humanoid = helpers.GetHumanoid()
         if humanoid then
             humanoid.WalkSpeed = 50
@@ -41,8 +44,23 @@ function Script1.Execute(gui, helpers)
         end
     end)
     
-    -- Jump power modifier
-    gui:AddButton("Set Jump Power (50)", function()
+    gui:AddButton("Walkspeed: Very Fast (100)", "⚡", function()
+        local humanoid = helpers.GetHumanoid()
+        if humanoid then
+            humanoid.WalkSpeed = 100
+            helpers.Notify("Success", "Walkspeed set to 100", 2)
+        else
+            helpers.Notify("Error", "Humanoid not found", 3)
+        end
+    end)
+    
+    gui:AddLabel("")
+    
+    -- Jump power section
+    gui:AddLabel("Jump Power", "🦘")
+    gui:AddLabel("")
+    
+    gui:AddButton("Jump Power: Normal (50)", "🦘", function()
         local humanoid = helpers.GetHumanoid()
         if humanoid then
             humanoid.JumpPower = 50
@@ -52,7 +70,7 @@ function Script1.Execute(gui, helpers)
         end
     end)
     
-    gui:AddButton("Set Jump Power (100)", function()
+    gui:AddButton("Jump Power: High (100)", "🚀", function()
         local humanoid = helpers.GetHumanoid()
         if humanoid then
             humanoid.JumpPower = 100
@@ -64,8 +82,21 @@ function Script1.Execute(gui, helpers)
     
     gui:AddLabel("")
     
-    -- Reset character
-    gui:AddButton("Reset Character", function()
+    -- Health section
+    gui:AddLabel("Health Management", "❤️")
+    gui:AddLabel("")
+    
+    gui:AddButton("Heal Character", "❤️", function()
+        local humanoid = helpers.GetHumanoid()
+        if humanoid then
+            humanoid.Health = humanoid.MaxHealth
+            helpers.Notify("Success", "Character healed to full health", 2)
+        else
+            helpers.Notify("Error", "Humanoid not found", 3)
+        end
+    end)
+    
+    gui:AddButton("Reset Character", "🔄", function()
         local humanoid = helpers.GetHumanoid()
         if humanoid then
             humanoid.Health = 0
@@ -75,19 +106,8 @@ function Script1.Execute(gui, helpers)
         end
     end)
     
-    -- Heal character
-    gui:AddButton("Heal Character", function()
-        local humanoid = helpers.GetHumanoid()
-        if humanoid then
-            humanoid.Health = humanoid.MaxHealth
-            helpers.Notify("Success", "Character healed", 2)
-        else
-            helpers.Notify("Error", "Humanoid not found", 3)
-        end
-    end)
-    
     gui:AddLabel("")
-    gui:AddLabel("Note: These are basic examples for educational purposes")
+    gui:AddLabel("Note: These are basic examples for educational purposes", "ℹ️")
 end
 
 return Script1
