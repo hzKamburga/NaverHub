@@ -161,7 +161,7 @@ end
 
 -- Main Execute Function
 function ExplorerScript.Execute(gui, helpers)
-    gui:ClearContent()
+    -- Don't clear here, let the tab system handle it
     
     gui:AddLabel("Object Explorer", "🔍")
     gui:AddLabel("")
@@ -185,6 +185,7 @@ function ExplorerScript.Execute(gui, helpers)
         helpers.Notify("Explorer", message, 5)
         
         -- Refresh UI
+        gui:ClearContent()
         ExplorerScript.Execute(gui, helpers)
     end)
     
@@ -198,6 +199,7 @@ function ExplorerScript.Execute(gui, helpers)
         gui:AddButton("Create NPC Target Group", "🎯", function()
             CreateTargetGroup("NPCs", ExplorerCache.NPCs)
             helpers.Notify("Explorer", "Created NPC target group", 2)
+            gui:ClearContent()
             ExplorerScript.Execute(gui, helpers)
         end)
         
@@ -247,6 +249,7 @@ function ExplorerScript.Execute(gui, helpers)
                                 ApplyESPToGroup(groupName)
                                 helpers.Notify("Group ESP", "Enabled for " .. groupName, 2)
                             end
+                            gui:ClearContent()
                             ExplorerScript.Execute(gui, helpers)
                         end
                     )
@@ -309,12 +312,14 @@ function ExplorerScript.Execute(gui, helpers)
                         RemoveESPFromGroup(groupName)
                         TargetGroups[groupName] = nil
                         helpers.Notify("Group", "Deleted " .. groupName, 2)
+                        gui:ClearContent()
                         ExplorerScript.Execute(gui, helpers)
                     end)
                     
                     gui:AddLabel("")
                     
                     gui:AddButton("← Back to Explorer", "◀️", function()
+                        gui:ClearContent()
                         ExplorerScript.Execute(gui, helpers)
                     end)
                 end
@@ -350,6 +355,7 @@ function ExplorerScript.Execute(gui, helpers)
         if #found > 0 then
             CreateTargetGroup("Enemies", found)
             helpers.Notify("Explorer", "Found " .. #found .. " enemies, created group", 3)
+            gui:ClearContent()
             ExplorerScript.Execute(gui, helpers)
         else
             helpers.Notify("Explorer", "No enemies found", 2)
@@ -362,6 +368,7 @@ function ExplorerScript.Execute(gui, helpers)
         end
         TargetGroups = {}
         helpers.Notify("Explorer", "All groups cleared", 2)
+        gui:ClearContent()
         ExplorerScript.Execute(gui, helpers)
     end)
     
